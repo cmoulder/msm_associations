@@ -1,5 +1,6 @@
 source 'http://rubygems.org'
 
+gem "starter_generators", :git => "https://github.com/raghubetina/starter_generators"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '5.0.2'
@@ -18,6 +19,8 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
+
+gem "starter_generators", :git => "https://github.com/raghubetina/starter_generators"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
