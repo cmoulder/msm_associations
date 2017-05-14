@@ -23,11 +23,66 @@
 
 
       <dt>Image url</dt>
-      <dd><%= @movie.image_url %></dd>
+      <dd><img src=<%= @movie.image_url %>></dd>
 
 
       <dt>Director</dt>
-      <dd><%= @movie.director_id %></dd>
+      <!-- <dd><%= Director.find_by(:id => @movie.director_id).name %></dd> -->
+      <dd><%= @movie.director.name %></dd>
+
+      <dt>Number of Characters</dt>
+      <dd><%= Character.where("movie_id = #{@movie.id}").count %></dd>
+
+      <dt>Characters</dt>
+      <% @movie.characters.each do |character| %>
+      <dd><%= character.name %></dd>
+      <% end %>
+
+      <dt>Add New Character</dt>
+      <form action="/create_character" method="post">
+        <!-- Hidden input for authenticity token to protect from forgery -->
+        <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+        <!-- Label and input for movie_id -->
+        <div class="form-group">
+          <label for="movie_id" class="control-label">
+          </label>
+
+          <input type="hidden" id="movie_id" name="movie_id" placeholder="Movie" class="form-control" value="<%= @movie.id %>">
+
+        </div>
+
+
+        <!-- Label and input for actor_id -->
+
+        <div class="form-group">
+          <label for="actor_id" class="control-label">
+            Actor
+          </label>
+
+
+          <!-- <input type="text" id="actor_id" name="actor_id" placeholder="Actor" class="form-control" value=""> -->
+          <%= select_tag(:actor_id, options_from_collection_for_select(Actor.all, :id, :name), :class => "form-control") %>
+        </div>
+
+
+
+        <!-- Label and input for name -->
+
+        <div class="form-group">
+          <label for="name" class="control-label">
+            Name
+          </label>
+
+
+          <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="">
+
+        </div>
+
+        <button class="btn btn-success">
+          Create Character
+        </button>
+
+      </form>
 
 
     </dl>
